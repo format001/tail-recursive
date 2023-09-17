@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    尾递归;
+    <script>
+      //尾调用;  函数的最后一步是 另一个函数的执行;
+
+      // function A(x) {
+      //   return B(x);
+      // }
+
+      // function foo() {
+      //   let m = 1;
+      //   let n = 2;
+
+      //   return bar(m + n);
+      // }
+
+      // function f() {
+      //   return bar(3);
+      // }
+
+      // f();
+
+      // function addOne(a) {
+      //   var one = 1;
+      //   function inner(b) {
+      //     return b + one;
+      //   }
+      //   return inner(a);
+      // }
+
+      // 尾调用 优化;  只保存内层函数的调用帧;
+
+      // ES6 强制要求 各平台执行;
+
+      // 当函数的执行 导致函数被定义; 形成闭包;
+
+      // 尾调用优化; 调用位置的特殊;
+
+      // AO => 上下文对象; call frame (调用帧)
+      // AO
+
+      // function foo(x) {
+      //   //let y = bar(x);
+      //   function bar(x){
+
+      //   }
+      //   return bar;
+      // }
+
+      // foo()()
+
+      // function foo(x) {
+      //   //let y = bar(x);
+      //   function bar(x){
+
+      //   }
+      //   bar();
+      // }
+
+      // foo()()
+
+      // function foo(x) {
+      //   //let y = bar(x);
+      //   if (x > 0) {
+      //     return m(x);
+      //   }
+
+      //   return n(x);
+      // }
+
+      // foo();
+
+      // 递归?  函数调用自身   =>   1. 执行体 2. 出口;
+
+      // 递归就是循环？
+      /*********************/
+
+      // 改写？   =>   1. 递归; 2. 尾调用;
+      //  内部变量 => 函数的参数;
+      // function factorial(n) {
+      //   if (n == 1) return 1;
+      //   return n * factorial(n - 1);
+      // }
+
+      // 5  5 * 4! =>   5* 4 * 3! =>
+
+      // function factorial(n, res = 1) {
+      //   if (n === 1) return res;
+      //   return factorial(n - 1, n * res);
+      // }
+
+      // console.log(factorial(5));
+      /*********************/
+
+      // console.log(factorial(5)); // 5 * 4 * 3 * 2 * 1;
+
+      // function factorial(n) {
+      //   var res = 1;
+      //   while (n) {
+      //     if (n === 1) return res;
+      //     res = n * res;
+      //     n--;
+      //   }
+      //   // return res;
+      // }
+
+      // console.log(factorial(5));
+
+      //
+      // function Fibonacci(n) {
+      //   if (n <= 1) return 1;
+
+      //   return Fibonacci(n - 1) + Fibonacci(n - 2);
+      // }
+
+      function Fibonacci(n, ac1 = 1, ac2 = 1) {
+        if (n <= 1) return ac2;
+        return Fibonacci(n - 1, ac2, ac1 + ac2);
+      }
+
+      // // 1 1  2  3  5  8
+      console.time('s')
+      console.log(Fibonacci(1000));
+      console.timeEnd('s')
+
+      //递归就是循环
+
+      // 尾调用？   尾调用优化？  在什么场景下用？
+      // 尾调用 和闭包是关系？  函数式编程中
+    </script>
+  </body>
+</html>
