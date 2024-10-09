@@ -122,14 +122,14 @@
       // }
 
       function Fibonacci(n, ac1 = 1, ac2 = 1) {
-        if (n <= 1) return ac2;
+        if (n <= 1) {
+          return ac2
+        }
         return Fibonacci(n - 1, ac2, ac1 + ac2);
       }
 
+      console.log(Fibonacci(10))
       // // 1 1  2  3  5  8
-      console.time('s')
-      console.log(Fibonacci(1000));
-      console.timeEnd('s')
 
       //递归就是循环
 
